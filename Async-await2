@@ -1,0 +1,25 @@
+let posts = [{title: "POST1"}, {title: "POST2"}];
+let lastActivityTime;
+
+const createPost= async(post) => {
+
+   await new Promise((resolve) => {
+        setTimeout(() => {
+            posts.push(post)
+            resolve()
+        }, 2000);
+    })
+
+}
+
+const deletePost = async() => {
+    await new Promise((resolve) => {
+        posts.pop();
+        resolve();
+    })
+}
+
+createPost({title: "PoST3"})
+.then(()=> console.log(posts))
+.then(() => deletePost())
+.then(() => console.log(posts))
