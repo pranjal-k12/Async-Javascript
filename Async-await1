@@ -1,0 +1,36 @@
+console.log('person1: shows ticket');
+console.log('person2: shows ticket');
+
+const preMovieScene = async() => {
+
+    const promiseWifeBringsTickets = new Promise((resolve, reject) => {
+        setTimeout(() => resolve('ticket'), 3000)
+    })
+
+    const getPopcorn = new Promise((resolve, reject) => resolve('popcorn'))
+    const getCoke = new Promise((resolve, reject) => resolve('coke'))
+    const getCandy = new Promise((resolve, reject) => resolve('candy'))
+
+    let ticket = await promiseWifeBringsTickets;
+
+    // console.log(`Wife: i have the ${ticket}`);
+    // console.log(`H: We should go in`);
+    // console.log('W: NO I am hungry');
+
+    let [popcorn, coke, candy]  = await Promise.all([getPopcorn, getCoke, getCandy])
+
+    // console.log(`H: i got some ${popcorn}`);
+    // console.log("W: I need butter on them");
+
+    console.log(`${popcorn}, ${coke}, ${candy}`);
+
+    // console.log(`H: I got some ${butter}`);
+    // console.log("W: let's go we are getiing late");
+
+    return ticket;
+}
+
+preMovieScene().then((m) => console.log(`Person3: shows ${m}`));
+
+console.log('person4: shows ticket');
+console.log('person5: shows ticket');
