@@ -1,0 +1,41 @@
+let posts = [{title: "POST1"}, {title: "POST2"}];
+let lastActivityTime;
+
+function create3rdPost(post) {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            posts.push(post)
+            resolve();
+        }, 2000)
+    })
+}
+
+function updateLastUserActivityTime() {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            lastActivityTime = new Date();
+            resolve();
+        }, 1000)
+    })
+}
+
+function deletePost() {
+    return new Promise((resolve) => {
+        posts.pop();
+        resolve();
+    })
+}
+
+Promise.all([create3rdPost({title: "POST3"}), updateLastUserActivityTime()])
+.then(() => {
+    posts.forEach((post)=>{
+        console.log(`Title: ${post.title}, Last Activity TIme: ${lastActivityTime}`);
+    })
+   
+})
+.then(() => deletePost())
+.then(() => {
+    posts.forEach((post) => {
+        console.log(`Title: ${post.title}, Last Activity TIme: ${lastActivityTime}`);
+    });
+})
